@@ -4,48 +4,92 @@ import no.hvl.dat100.jplab11.common.TODO;
 import no.hvl.dat100.jplab11.oppgave1.*;
 
 public class Blogg {
+	
+	Innlegg[] innleggtabell;
+	int nesteledige;
+	
 
 	// TODO: objektvariable 
 
 	public Blogg() {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+    
+	innleggtabell = new Innlegg[20];
+	int nesteledige = 0;
 	}
 
 	public Blogg(int lengde) {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
-	}
+		innleggtabell = new Innlegg[lengde];
+		nesteledige = 0;
 
+	}
+	
 	public int getAntall() {
-		throw new UnsupportedOperationException(TODO.method());
+		return nesteledige;
 	}
 	
 	public Innlegg[] getSamling() {
-		throw new UnsupportedOperationException(TODO.method());
 
+		return this.innleggtabell;
 	}
 	
+	
+	
 	public int finnInnlegg(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
+		for(int i = 0; i < nesteledige; i++)
+			if(innleggtabell[i].getId() == innlegg.getId())  {
+				return i;
+			}
+		
+	return -1;
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		throw new UnsupportedOperationException(TODO.method());
+		boolean finnes = false;
+		int i = 0;
+		
+		while (i < nesteledige && !finnes) {
+			if(innlegg.getId() == innleggtabell[i].getId()){
+				finnes = true;
+			}else {
+			i++;
+		}
+		}
+		return finnes;
+		
 	}
 
 	public boolean ledigPlass() {
-		throw new UnsupportedOperationException(TODO.method());
-
+		
+	boolean ledig = true;
+		
+		if(nesteledige == innleggtabell.length) {
+			ledig = false;
+		}
+		return ledig;
 	}
+	
 	
 	public boolean leggTil(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
-	}
+		
+		if (finnes(innlegg)) {
+			innleggtabell[nesteledige] = innlegg;
+			return false;
+		}else {innleggtabell[nesteledige] = innlegg;
+			nesteledige++; 
+			return true;
+		}
+	
+		}
+	
 	
 	public String toString() {
-		throw new UnsupportedOperationException(TODO.method());
-	}
+     String tekst = "" + nesteledige + "\n";
+     
+     for(int i = 0; i<nesteledige ; i++) {
+    	 tekst += innleggtabell[i].toString();
+     }
+     return tekst;
+ 	}
 
 	// valgfrie oppgaver nedenfor
 	
